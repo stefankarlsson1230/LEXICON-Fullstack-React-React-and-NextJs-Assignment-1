@@ -1,8 +1,9 @@
 import { Geist, Geist_Mono, Noto_Serif } from "next/font/google"
-
 import "./globals.css"
-// import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
 
 const notoSerif = Noto_Serif({subsets:['latin'],variable:'--font-serif'});
 
@@ -30,8 +31,20 @@ export default function RootLayout({
       <body>
         <header>
           <h1 className="text-center text-4xl my-4">Book Management System</h1>
-        </header>
+          
+          <Button asChild>
+            <Link href="/">Home</Link>
+          </Button>
+        
+          <Button asChild>
+            <Link href="/test">Test</Link>
+          </Button>
 
+          <Button asChild>
+            <Link href="/seed">Seed database</Link>
+          </Button> 
+
+        </header>
         <main>
           {children}
         </main>
