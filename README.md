@@ -16,11 +16,11 @@ This document outlines the specifications for a Book Management System built wit
 The Prisma schema will define a Book model with the following structure:
 ```
 model Book {
-    id          String  @id     @default(cuid())
+    id          String      @id     @default(cuid())
     title       String
     author      String
     published   DateTime
-    isbn        String  @unique
+    isbn        String      @unique
     createdAt   DateTime    @default(now())
     updatedAt   DateTime    @updatedAt
 
