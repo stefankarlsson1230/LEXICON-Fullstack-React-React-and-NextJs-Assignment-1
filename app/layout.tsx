@@ -37,7 +37,7 @@ export default function RootLayout({
           </Button>
         
           <Button asChild>
-            <Link href="/test">Test</Link>
+            <Link href="/books">Books</Link>
           </Button>
 
           <Button asChild>

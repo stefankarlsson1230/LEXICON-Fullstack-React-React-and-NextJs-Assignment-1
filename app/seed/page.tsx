@@ -29,12 +29,10 @@ const books: Book[] = [
   { title: "The Eye of the World", author: "Robert Jordan", published: new Date("1990-01-15"), ISBN: "978-0812511819" },
   { title: "Do Androids Dream of Electric Sheep?", author: "Philip K. Dick", published: new Date("1968-01-01"), ISBN: "978-0345404473" },
   { title: "The Poppy War", author: "R.F. Kuang", published: new Date("2018-05-01"), ISBN: "978-0062662569" },
-  { title: "Stranger in a Strange Land", author: "Robert A. Heinlein", published: new Date("1961-06-01"), ISBN: "978-0441788385" },
   { title: "The Left Hand of Darkness", author: "Ursula K. Le Guin", published: new Date("1969-03-01"), ISBN: "978-0441478125" },
   { title: "Mistborn: The Final Empire", author: "Brandon Sanderson", published: new Date("2006-07-17"), ISBN: "978-0765350381" },
   { title: "The Hitchhiker's Guide to the Galaxy", author: "Douglas Adams", published: new Date("1979-10-12"), ISBN: "978-0345391803" },
   { title: "The Priory of the Orange Tree", author: "Samantha Shannon", published: new Date("2019-02-26"), ISBN: "978-1635570298" },
-  { title: "Snow Crash", author: "Neal Stephenson", published: new Date("1992-06-01"), ISBN: "978-0553380958" },
   { title: "The Martian", author: "Andy Weir", published: new Date("2014-02-11"), ISBN: "978-0553418026" },
   { title: "American Gods", author: "Neil Gaiman", published: new Date("2001-06-19"), ISBN: "978-0380789030" },
   { title: "The Martian Chronicles", author: "Ray Bradbury", published: new Date("1950-05-01"), ISBN: "978-0553278224" },
@@ -42,23 +40,34 @@ const books: Book[] = [
   { title: "Project Hail Mary", author: "Andy Weir", published: new Date("2021-05-04"), ISBN: "978-0593135204" }
 ];
 
+ 
+    let databaseEmpty: boolean = (await prisma.book.findMany()).length === 0
 
-
-    if ((await prisma.book.findMany()).length === 0) await seedDatabase();
-    
-    async function seedDatabase() {
-        await prisma.book.createMany({
-            data: books.map((book) => ({
-                title: book.title,
-                author: book.author,
-                published: book.published,
-                isbn: book.ISBN
-            })
-        )});
+    if (databaseEmpty) {
+        await seedDatabase();
+        databaseEmpty = false;
+        return <p>The database is now filled!</p>;
     }
-        
-         
-    return <p>The database is filled!</p>;
+    else {
+         return <p>The database was already full</p>;
+    }
+ 
+    
+ async function seedDatabase() {
+        await Promise.all (
+            books.map((book) => 
+                prisma.book.create({
+                    data: {
+                        title: book.title,
+                        author: book.author,
+                        published: book.published,
+                        isbn: book.ISBN
+                    }
+                })
+            )
+        )
+    }
+
 
 }
 
