@@ -18,6 +18,7 @@ export default async function books() {
                 <TableCaption className="mb-6 text-2xl font-bold">All books</TableCaption>
                 <TableHeader>
                     <TableRow>
+                        <TableHead></TableHead>
                         <TableHead>Title</TableHead>
                         <TableHead>Author</TableHead>
                         <TableHead>Published</TableHead>
