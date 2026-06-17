@@ -1,7 +1,6 @@
 import { TableContent } from "@/components/table-content";
 import { Table, TableBody, TableCaption, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import prisma from "@/lib/prisma";
-import { TableConfigIcon } from "lucide-react";
 
 export default async function books() {
 

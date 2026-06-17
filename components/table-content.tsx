@@ -1,3 +1,5 @@
+"use client"
+
 import { Book } from "@/lib/generated/prisma/client"
 import { TableCell, TableRow } from "./ui/table";
 import Link from "next/link";
