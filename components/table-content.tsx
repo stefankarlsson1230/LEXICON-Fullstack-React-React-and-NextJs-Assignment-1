@@ -9,7 +9,7 @@ type Prop = {
     book: Book
 }
 
-export async function TableContent({ book }: Prop) {
+export function TableContent({ book }: Prop) {
 
     return (
         <TableRow>

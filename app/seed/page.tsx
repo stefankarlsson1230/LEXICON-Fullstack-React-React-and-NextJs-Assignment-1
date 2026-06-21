@@ -41,16 +41,16 @@ const books: Book[] = [
 ];
 
  
-    let databaseEmpty: boolean = (await prisma.book.findMany()).length === 0
+let databaseEmpty: boolean = (await prisma.book.findMany()).length === 0
 
-    if (databaseEmpty) {
-        await seedDatabase();
-        databaseEmpty = false;
-        return <p>The database is now filled!</p>;
-    }
-    else {
-         return <p>The database was already full</p>;
-    }
+if (databaseEmpty) {
+    await seedDatabase();
+    databaseEmpty = false;
+    return <p>The database is now filled!</p>;
+}
+else {
+        return <p>The database was already full</p>;
+}
  
     
  async function seedDatabase() {

@@ -35,10 +35,6 @@ export default function RootLayout({
           <Button asChild>
             <Link href="/">Home</Link>
           </Button>
-        
-          <Button asChild>
-            <Link href="/books">Books</Link>
-          </Button>
 
           <Button asChild>
             <Link href="/seed">Seed database</Link>
