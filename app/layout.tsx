@@ -1,11 +1,10 @@
-import { Geist, Geist_Mono, Noto_Serif } from "next/font/google"
+import { Geist, Geist_Mono, Roboto_Slab } from "next/font/google"
+
 import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
-
-const notoSerif = Noto_Serif({subsets:['latin'],variable:'--font-serif'});
+const robotoSlab = Roboto_Slab({subsets:['latin'],variable:'--font-serif'});
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -26,25 +25,10 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontSans.variable, fontMono.variable, "font-serif", notoSerif.variable)}
+      className={cn("antialiased", fontSans.variable, fontMono.variable, "font-serif", robotoSlab.variable)}
     >
       <body>
-        <header>
-          <h1 className="text-center text-4xl my-4">Book Management System</h1>
-          
-          <Button asChild>
-            <Link href="/">Home</Link>
-          </Button>
-
-          <Button asChild>
-            <Link href="/seed">Seed database</Link>
-          </Button> 
-
-        </header>
-        <main>
-          {children}
-        </main>
-        
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   )
