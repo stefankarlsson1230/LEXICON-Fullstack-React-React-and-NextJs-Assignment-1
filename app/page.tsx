@@ -1,19 +1,32 @@
-import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCaption, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { SeedPage } from "./_actions/seed";
+import { TableContent } from "@/components/table-content";
+import { getAllBooks } from "./_actions/getAllBooks";
 
-export default function Page() {
-  return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
-      </div>
-    </div>
-  )
+export default async function books() {
+
+    if(!SeedPage()) return <p>Something went wrong with seeding the database!</p>
+
+    const books = await getAllBooks();
+
+    return (
+        <div className="p-4 max-w-6xl mx-auto">
+
+            <Table className="caption-top">
+                <TableCaption className="mb-6 text-2xl font-bold">All books</TableCaption>
+                <TableHeader>
+                    <TableRow>
+                        <TableHead></TableHead>
+                        <TableHead>Title</TableHead>
+                        <TableHead>Author</TableHead>
+                        <TableHead>Published</TableHead>
+                        <TableHead>ISBN</TableHead>
+                    </TableRow>
+                </TableHeader> 
+                <TableBody>
+                    {books.map((b) => <TableContent key={b.id} book={b} />)}
+                </TableBody>
+            </Table>
+        </div> 
+    );
 }
