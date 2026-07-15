@@ -3,7 +3,6 @@ import { BookCard } from "@/components/book-card";
 import { notFound } from "next/navigation";
 
 export default async function BookPage( props: { params: Promise<{ id: string}> }) {
-
     const { id } = await props.params;
     
     const book = await getBook(id);

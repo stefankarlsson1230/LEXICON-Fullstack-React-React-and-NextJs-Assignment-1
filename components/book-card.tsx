@@ -1,7 +1,9 @@
 "use client";
 
 import { Book } from "@/lib/generated/prisma/client";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
+import { Button } from "./ui/button";
+import Link from "next/link";
 
 type Prop = {
     book: Book
@@ -23,12 +25,14 @@ export function BookCard({book}: Prop) {
                 <p className="text-xl"><span className="font-bold">Created: </span>{book.createdAt.toLocaleDateString()}</p>
                 <p className="text-xl"><span className="font-bold">Updated: </span>{book.updatedAt.toLocaleDateString()}</p>
             </CardContent>
-            
+            <CardFooter>
+                <Button>
+                    <Link href="#">Edit</Link>
+                </Button>
+                <Button>
+                    <Link href="#">Delete</Link>
+                </Button>
+            </CardFooter>
         </Card>
-        
-
-
-
     );
-
 }
