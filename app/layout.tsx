@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Roboto_Slab } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const robotoSlab = Roboto_Slab({subsets:['latin'],variable:'--font-serif'});
 
@@ -28,7 +30,19 @@ export default function RootLayout({
       className={cn("antialiased", fontSans.variable, fontMono.variable, "font-serif", robotoSlab.variable)}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <header className="p-4 max-w-6xl mx-auto">
+            <nav>
+              <Button>
+                <Link href="/">All books</Link>
+              </Button>
+              <Button>
+                <Link href="#">Add book</Link>
+              </Button>
+            </nav>
+          </header>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )

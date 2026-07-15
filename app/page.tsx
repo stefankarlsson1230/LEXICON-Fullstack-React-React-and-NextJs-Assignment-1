@@ -5,7 +5,7 @@ import { getAllBooks } from "./_actions/getAllBooks";
 
 export default async function books() {
 
-    if(!SeedPage()) return <p>Something went wrong with seeding the database!</p>
+    if(!(await SeedPage())) return <p>Something went wrong with seeding the database!</p>
 
     const books = await getAllBooks();
 
