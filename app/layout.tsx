@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Toaster } from "sonner";
 
 const robotoSlab = Roboto_Slab({subsets:['latin'],variable:'--font-serif'});
 
@@ -42,6 +43,7 @@ export default function RootLayout({
             </nav>
           </header>
           {children}
+          <Toaster position="top-center" richColors/>
         </ThemeProvider>
       </body>
     </html>

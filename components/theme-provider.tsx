@@ -47,7 +47,8 @@ function ThemeHotkey() {
         return
       }
 
-      if (event.key.toLowerCase() !== "d") {
+      // Fix for annoying ThemeProvider bug!
+      if (event.key?.toLowerCase() !== "d") {
         return
       }
 

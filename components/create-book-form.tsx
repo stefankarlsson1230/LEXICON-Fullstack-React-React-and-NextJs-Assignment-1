@@ -4,9 +4,14 @@ import { formSchema } from "@/app/_validation/form-schema";
 import { useForm } from "@tanstack/react-form";
 import { FieldGroup } from "./ui/field";
 import { Button } from "./ui/button";
+import { createBook } from "@/app/_actions/createBook";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation"
 
 
 export function CreateBookForm() {
+    const router = useRouter();
+
     const form = useForm({
         defaultValues: {
             title: "",
@@ -18,8 +23,17 @@ export function CreateBookForm() {
             onSubmit: formSchema,
         },
         onSubmit: async ({value}) => {
-            // The submitting part!!
-            alert("Book created!!!");
+            const newBook = await createBook(value);
+
+            if (newBook) {
+                toast.success("New book created!", {
+                position: "top-center",
+                duration: 4000
+                })
+                router.push(`../books/${newBook.id}`);
+            } else {
+                toast.error("The ISBN must be unique!");
+            }
         }
     });    
 
