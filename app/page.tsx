@@ -24,7 +24,7 @@ export default async function books() {
                     </TableRow>
                 </TableHeader> 
                 <TableBody>
-                    {books.map((b) => <TableContent key={b.id} book={b} />)}
+                    {books && books.map((b) => <TableContent key={b.id} book={b} />)}
                 </TableBody>
             </Table>
         </div> 

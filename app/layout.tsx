@@ -33,11 +33,11 @@ export default function RootLayout({
         <ThemeProvider>
           <header className="p-4 max-w-6xl mx-auto">
             <nav>
-              <Button>
+              <Button asChild>
                 <Link href="/">All books</Link>
               </Button>
-              <Button>
-                <Link href="#">Add book</Link>
+              <Button asChild>
+                <Link href="/create">Add book</Link>
               </Button>
             </nav>
           </header>
