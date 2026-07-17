@@ -4,6 +4,7 @@ import { Book } from "@/lib/generated/prisma/client";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { DeleteButton } from "./delete-button";
 
 type Prop = {
     book: Book
@@ -29,9 +30,7 @@ export function BookCard({book}: Prop) {
                 <Button>
                     <Link href="#">Edit</Link>
                 </Button>
-                <Button>
-                    <Link href="#">Delete</Link>
-                </Button>
+                <DeleteButton id={book.id}/>
             </CardFooter>
         </Card>
     );
