@@ -27,8 +27,8 @@ export function BookCard({book}: Prop) {
                 <p className="text-xl"><span className="font-bold">Updated: </span>{book.updatedAt.toLocaleDateString()}</p>
             </CardContent>
             <CardFooter>
-                <Button>
-                    <Link href="#">Edit</Link>
+                <Button asChild>
+                    <Link href={`../edit/${book.id}`}>Edit</Link>
                 </Button>
                 <DeleteButton id={book.id}/>
             </CardFooter>

@@ -1,38 +1,51 @@
 "use client"
 
-import { createFormSchema } from "@/app/_validation/create-form-schema";
+import { editFormSchema } from "@/app/_validation/edit-form-schema";
 import { useForm } from "@tanstack/react-form";
 import { FieldGroup } from "./ui/field";
 import { Button } from "./ui/button";
-import { createBook } from "@/app/_actions/createBook";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation"
+import { Book } from "@/lib/generated/prisma/client";
+import { editBook } from "@/app/_actions/editBook";
+
+type Prop = {
+    book: Book
+}
 
 
-export function CreateBookForm() {
+export function EditBookForm({ book }: Prop) {
     const router = useRouter();
 
     const form = useForm({
         defaultValues: {
-            title: "",
-            author: "",
-            published: "2000-01-01",
-            isbn: ""
+            id: book.id,
+            title: book.title,
+            author: book.author,
+            published: book.published.toLocaleDateString(),
+            isbn: book.isbn
         },
         validators: {
-            onSubmit: createFormSchema,
+            onChange: editFormSchema,
+            onSubmit: editFormSchema
         },
         onSubmit: async ({value}) => {
-            const newBook = await createBook(value);
+            const updatedBook = await editBook({
+                id: book.id,
+                title: value.title,
+                author: value.author,
+                published: value.published,
+                isbn: value.isbn
+            });
 
-            if (newBook) {
-                toast.success("New book created!", {
+            if (updatedBook) {
+                toast.success("Book updated!", {
                 position: "top-center",
                 duration: 4000
                 })
-                router.push(`../books/${newBook.id}`);
+                router.push(`../books/${updatedBook.id}`);
             } else {
-                toast.error("The ISBN must be unique!");
+                toast.error("Something went wrong!");
             }
         }
     });    
@@ -156,7 +169,7 @@ export function CreateBookForm() {
                     )}
                 </form.Field>
 
-                <Button type="submit" className="w-sm">Create Book</Button>
+                <Button type="submit" className="w-sm">Update Book</Button>
 
             </FieldGroup>
         </form>

@@ -1,13 +1,13 @@
 "use server"
 
 import z from "zod";
-import { formSchema } from "../_validation/form-schema";
+import { createFormSchema } from "../_validation/create-form-schema";
 import prisma from "@/lib/prisma";
 import { Book } from "@/lib/generated/prisma/client";
 
 
-export async function createBook(values: z.infer<typeof formSchema>): Promise<Book | null> {
-    const data = formSchema.parse(values);
+export async function createBook(values: z.infer<typeof createFormSchema>): Promise<Book | null> {
+    const data = createFormSchema.parse(values);
 
     const publishedDate = new Date(values.published);
 
